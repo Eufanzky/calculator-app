@@ -1,0 +1,28 @@
+:root {
+  --gray-1: #292d36;
+  --gray-2: #22252d;
+  --green: #26f5cf;
+  --red: #e66565;
+  --white: #FFFFFF;
+}
+
+.main-content {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--gray-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.main-content:nth-child(n) {
+  color: var(--white);
+}
+.main-title {
+  font-size: 2.85rem;
+  text-decoration: underline;
+}
+.main-description {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,33 @@
+.button-element {
+  width: 100%;
+  height: 70px;
+  border: none;
+  border-radius: 10px;
+
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
+.button-element:hover {
+    background-color: var(--white);
+    color: var(--gray-2);
+    cursor: pointer;
+}
+
+
+/*---buttons color--*/
+.normal-bg-color {
+  background-color: var(--gray-2);
+  color: var(--white);
+}
+.reset-button {
+  background-color: var(--green);
+  color: var(--white);
+}
+.equals-button {
+  background-color: var(--red);
+  color: var(--white);
+}
+.delete-button {
+  background-color: var(--green);
+  color: var(--white);
+}
