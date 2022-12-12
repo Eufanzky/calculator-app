@@ -20,7 +20,7 @@ export function Button({ className, content }) {
     } else if (e.target.className === "button-element reset-button") {
       resetScreen();
     } else if (e.target.className === "button-element equals-button") {
-    //   makeOperations(numbers[0], numbers[1], )
+      makeOperations(1,2,3)
     }
   };
   

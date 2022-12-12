@@ -8,6 +8,14 @@ export function CalculatorContextProvider(props) {
 
   const writeOnScreen = (value) => {
     if (
+      (screenValue.slice(-2) === " +" ||
+        screenValue.slice(-2) === " -" ||
+        screenValue.slice(-2) === " x" ||
+        screenValue.slice(-2) === " /") &&
+      (value === "+" || value === "-" || value === "x" || value === "/")
+    ) {
+      console.log("error");
+    } else if (
       value === "+" ||
       value === "-" ||
       value === "x" ||
@@ -15,28 +23,12 @@ export function CalculatorContextProvider(props) {
       screenValue.slice(-1) === "+" ||
       screenValue.slice(-1) === "-" ||
       screenValue.slice(-1) === "x" ||
-      screenValue.slice(-1) === "/" 
+      screenValue.slice(-1) === "/"
     ) {
-      setScreenValue(screenValue + ' ' + value);
+      setScreenValue(screenValue + " " + value);
     } else {
       setScreenValue(screenValue + value);
     }
-    // if (
-    //   (screenValue.slice(-1) === "+" ||
-    //     screenValue.slice(-1) === "-" ||
-    //     screenValue.slice(-1) === "x" ||
-    //     screenValue.slice(-1) === "/" ||
-    //     screenValue.slice(-1) === ".") &&
-    //   (value === "+" ||
-    //     value === "-" ||
-    //     value === "x" ||
-    //     value === "/" ||
-    //     value === ".")
-    // ) {
-    //   console.log("error");
-    // } else {
-    //   setScreenValue(screenValue + value);
-    // }
   };
 
   const resetScreen = () => {
@@ -49,23 +41,54 @@ export function CalculatorContextProvider(props) {
     console.log(screenValue);
   };
 
-  // const addition = (a, b) => a + b;
-  // const substracion = (a, b) => a - b;
-  // const multiplication = (a, b) => a * b;
-  // const division = (a, b) => a / b;
-  // const makeOperations = (firstValue, secondValue, operation) => {
-  //   let result;
-  //   if (operation==="+") {
-  //     result = addition(firstValue,secondValue);
-  //   } else if(operation==="-") {
-  //     result = substracion(firstValue,secondValue);
-  //   } else if(operation==="x") {
-  //     result = multiplication(firstValue,secondValue);
-  //   } else if(operation==="/") {
-  //     result = division(firstValue,secondValue);
-  //   }
-  //   setAnswerValue(result);
-  // };
+  const makeOperations = (firstValue, secondValue, operation) => {
+    let screenArray = extractArray(screenValue);
+    console.log(screenArray);
+    let ws = 0;
+    while (screenArray.length!==1) {
+      if (screenArray.findIndex(e=>e==="x") !== -1 && screenArray.findIndex(e=>e==="x") !== -1) {
+        if(screenArray.findIndex(e=>e==="x") > screenArray.findIndex(e=>e==="/")) {
+          screenArray = replaceInArray(screenArray, "x");
+        } else if(screenArray.findIndex(e=>e==="x") < screenArray.findIndex(e=>e==="/")) {
+          screenArray = replaceInArray(screenArray, "/");
+        }
+      }
+
+      if(screenArray.findIndex(e=>e==="x") === -1 && screenArray.findIndex(e=>e==="x") === -1) {
+        if(screenArray.findIndex(e=>e==="+") > screenArray.findIndex(e=>e==="-")) {
+          screenArray = replaceInArray(screenArray, "+");
+        } else if(screenArray.findIndex(e=>e==="+") < screenArray.findIndex(e=>e==="-")) {
+          screenArray = replaceInArray(screenArray, "-");
+        }
+      }
+
+    }
+    console.log(screenArray);
+  };
+
+  const extractArray = (stringValue) => {
+    let arrayValue = stringValue.split(" ");
+    return arrayValue;
+  };
+
+  //replace three spaces into one single value
+  const replaceInArray = (array, operation) => {
+    const index = array.findIndex((element) => element === operation);
+    let auxiliarValue;
+    if(operation==="+") {
+      auxiliarValue = parseFloat(array[index-1]) + parseFloat(array[index+1]);
+    } else if(operation==="-") {
+      auxiliarValue = parseFloat(array[index-1]) - parseFloat(array[index+1]);
+    } else if(operation==="x") {
+      auxiliarValue = parseFloat(array[index-1]) * parseFloat(array[index+1]);
+    } else if(operation==="/") {
+      auxiliarValue = parseFloat(array[index-1]) / parseFloat(array[index+1]);
+    }
+    // console.log(array[index - 1], array[index], array[index + 1]);
+    // console.log(auxiliarValue);
+    array = [...array.slice(0,index-1),JSON.stringify(auxiliarValue),...array.slice(index+2)]
+    return array
+  };
 
   return (
     <CalculatorContext.Provider
@@ -75,6 +98,7 @@ export function CalculatorContextProvider(props) {
         writeOnScreen,
         resetScreen,
         deleteScreen,
+        makeOperations,
       }}
     >
       {props.children}
