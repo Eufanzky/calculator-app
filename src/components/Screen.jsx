@@ -1,8 +1,8 @@
 import './Screen.css'
 
-export function Screen () {
+export function Screen ({ screenValue }) {
     return(<div className="screen">
-        <p>123 x 128</p>
+        <p>{screenValue}</p>
         <p>Answer</p>
     </div>)
 }
