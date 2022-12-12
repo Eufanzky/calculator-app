@@ -33,15 +33,16 @@ export function CalculatorContextProvider(props) {
 
   const resetScreen = () => {
     setScreenValue("");
+    setAnswerValue("");
   };
 
   const deleteScreen = () => {
     let size = screenValue.length;
     setScreenValue(screenValue.slice(0, size - 1));
-    console.log(screenValue);
+    // console.log(screenValue);
   };
 
-  const makeOperations = (firstValue, secondValue, operation) => {
+  const makeOperations = () => {
     let screenArray = extractArray(screenValue);
     console.log(screenArray);
     let ws = 0;
@@ -63,7 +64,7 @@ export function CalculatorContextProvider(props) {
       }
 
     }
-    console.log(screenArray);
+    setAnswerValue(parseFloat(screenArray[0]).toFixed(2));
   };
 
   const extractArray = (stringValue) => {
