@@ -8,21 +8,35 @@ export function CalculatorContextProvider(props) {
 
   const writeOnScreen = (value) => {
     if (
-      (screenValue.slice(-1) === "+" ||
-        screenValue.slice(-1) === "-" ||
-        screenValue.slice(-1) === "x" ||
-        screenValue.slice(-1) === "/" ||
-        screenValue.slice(-1) === ".") &&
-      (value === "+" ||
-        value === "-" ||
-        value === "x" ||
-        value === "/" ||
-        value === ".")
+      value === "+" ||
+      value === "-" ||
+      value === "x" ||
+      value === "/" ||
+      screenValue.slice(-1) === "+" ||
+      screenValue.slice(-1) === "-" ||
+      screenValue.slice(-1) === "x" ||
+      screenValue.slice(-1) === "/" 
     ) {
-      console.log("error");
+      setScreenValue(screenValue + ' ' + value);
     } else {
       setScreenValue(screenValue + value);
     }
+    // if (
+    //   (screenValue.slice(-1) === "+" ||
+    //     screenValue.slice(-1) === "-" ||
+    //     screenValue.slice(-1) === "x" ||
+    //     screenValue.slice(-1) === "/" ||
+    //     screenValue.slice(-1) === ".") &&
+    //   (value === "+" ||
+    //     value === "-" ||
+    //     value === "x" ||
+    //     value === "/" ||
+    //     value === ".")
+    // ) {
+    //   console.log("error");
+    // } else {
+    //   setScreenValue(screenValue + value);
+    // }
   };
 
   const resetScreen = () => {
@@ -49,11 +63,9 @@ export function CalculatorContextProvider(props) {
   //     result = multiplication(firstValue,secondValue);
   //   } else if(operation==="/") {
   //     result = division(firstValue,secondValue);
-  //   } 
+  //   }
   //   setAnswerValue(result);
   // };
-
-
 
   return (
     <CalculatorContext.Provider

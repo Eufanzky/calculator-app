@@ -11,20 +11,6 @@ export function Button({ className, content }) {
     makeOperations,
   } = useContext(CalculatorContext);
 
-//   const extractNumbers = (stringValue) => {
-//     let arrayString;
-//     if (stringValue.indexOf("+")) {
-//         arrayString = stringValue.split("+"); 
-//     } else if(stringValue.indexOf("-")) {
-//         arrayString = stringValue.split("-"); 
-//     } else if(stringValue.indexOf("x")) {
-//         arrayString = stringValue.split("x"); 
-//     } else if(stringValue.indexOf("/")) {
-//         arrayString = stringValue.split("/"); 
-//     }
-//     console.log(arrayString);
-//     return arrayString; //returns an array with 2 numbers
-//   } 
 
   const handleClick = (e) => {
     if (e.target.className === "button-element normal-bg-color") {
@@ -37,7 +23,7 @@ export function Button({ className, content }) {
     //   makeOperations(numbers[0], numbers[1], )
     }
   };
-
+  
   return (
     <button onClick={handleClick} className={className}>
       {content}
