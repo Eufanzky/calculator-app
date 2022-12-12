@@ -6,12 +6,12 @@ import { useContext } from "react";
 import { CalculatorContext } from "../context/CalculatorContext";
 
 export function Calculator() {
-  const { screenValue, writeOnScreen, resetScreen, deleteScreen } =
+  const { screenValue, answerValue, writeOnScreen, resetScreen, deleteScreen } =
     useContext(CalculatorContext);
 
   return (
     <section className="calculator">
-      <Screen screenValue={screenValue} />
+      <Screen screenValue={screenValue} answerValue={answerValue} />
       <div className="buttons-container">
         <Button className="button-element normal-bg-color" content={7} />
         {/*1*/}
